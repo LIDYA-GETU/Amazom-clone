@@ -51,14 +51,14 @@ function Cart() {
                                 onClick={() => increment(item)}
                               >
                                 <IoIosArrowUp 
-                                size={20}/>
+                                size={22}/>
                               </button>
                               <span>{item.amount}</span>
                               <button
                                 className={classes.btn}
                                 onClick={() => decrement(item.id)}
                               >
-                                <IoIosArrowDown size={20} />
+                                <IoIosArrowDown size={22} />
                               </button>
                             </div>
                           </section>
