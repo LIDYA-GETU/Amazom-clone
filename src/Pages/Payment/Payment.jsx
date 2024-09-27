@@ -12,7 +12,7 @@ import { setDoc, collection, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import ProtectedRoute from "../../Components/ProtectedRoute/ProtectedRoute";
 function Payment() {
-  const [{ user, basket }] = useContext(DataContext);
+  const [{ user, basket }, dispatch] = useContext(DataContext);
   const totalItem = basket?.reduce((amount, item) => {
     return item.amount + amount;
   }, 0);
@@ -59,6 +59,8 @@ function Payment() {
           created: paymentIntent.created,
         }
       );
+      // empty basket
+      dispatch({ type: Type.EMPTY_BASKET });
       setProcessing(false);
       navigate("/orders", { state: { msg: "you have placed new order " } });
     } catch (error) {

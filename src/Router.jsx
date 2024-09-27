@@ -23,14 +23,27 @@ function Routering() {
         <Route
           path="/payments"
           element={
-            <ProtectedRoute msg={"you must log in to pay"} redirect={"/payments"}>
-            <Elements stripe={stripePromise}>
-              <Payment />
-            </Elements>
+            <ProtectedRoute
+              msg={"you must log in to pay"}
+              redirect={"/payments"}
+            >
+              <Elements stripe={stripePromise}>
+                <Payment />
+              </Elements>
             </ProtectedRoute>
           }
         />
-        <Route path="/orders" element={<Orders />} />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute
+              msg={"you must log in to see your orders"}
+              redirect={"/orders"}
+            >
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/category/:categoryName" element={<Result />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="cart" element={<Cart />} />

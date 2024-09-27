@@ -33,7 +33,7 @@ signInWithEmailAndPassword(auth,email,password)
     type: Type.SET_USER,
     user: userInfo.user});
     setLoading({...loading, signIn:false});
-    navigate("/")
+    navigate(navStateData?.state?.redirect ||"/");
 })
 .catch((err)=>{
   // console.log(err);
@@ -51,7 +51,7 @@ else{
       user: userInfo.user,
     });
     setLoading({...loading,signUp:false});
-    navigate("/");
+   navigate(navStateData?.state?.redirect || "/");
   }).catch((err)=>{
     // console.log(err);
     setError(err.message)
@@ -74,6 +74,18 @@ else{
       </Link>
       <div className={classes.login__container}>
    <h1>Sign In</h1>
+   {
+    navStateData?.state?.msg &&(
+      <small style={{
+        padding:"5px",
+        textAlign: "center",
+        color: "red",
+        fontWeight:"bold",
+      }}>
+      {navStateData?.state?.msg}
+      </small>
+    )
+   }
    <form action="">
     <div>
       <label htmlFor="email">Email</label>
