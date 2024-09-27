@@ -1,7 +1,7 @@
 import React, { useState,useContext } from 'react'
 // import LayOut from '../../Components/LayOut/LayOut'
 import classes from "./SignUp.module.css"
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate,useLocation} from 'react-router-dom';
 import {auth} from "../../Utility/Firebase"
   import{signInWithEmailAndPassword, createUserWithEmailAndPassword
 } from "firebase/auth";
@@ -18,6 +18,8 @@ import { Type } from '../../Utility/action.type';
   })
   const[{user}, dispatch]=useContext(DataContext)
   const navigate=useNavigate()
+  const navStateData=useLocation()
+  console.log(navStateData);
   const authHandeler = async(e)=>{
    e.preventDefault();
   console.log(e.target.name);

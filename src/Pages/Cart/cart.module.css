@@ -71,8 +71,10 @@ padding: 20px;
       display: flex;
       gap: 20px;
 }
-/* @media screen and(max-width:968px){
-      .container (
+@media screen and (max-width:968px){
+      .container {
             flex-direction: column;
             order: 1;
-      ) */
+      }
+}
+
