@@ -4,24 +4,23 @@ import { db } from "../../Utility/Firebase";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import classes from "./orders.module.css";
 import ProductCard from "../../Components/product/ProductCard";
-import { setDoc, collection,doc } from "firebase/firestore";
+import { query, collection, orderBy, onSnapshot} from "firebase/firestore";
 function Orders() {
   const [{ user }, dispatch] = useContext(DataContext);
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     if (user) {
-      db.collection("users")
-        .doc(user.uid)
-        .collection("orders")
-        .orderBy("created", "desc")
-        .onSnapshot((snapshot) => {
-          console.log(snapshot);
-          setOrders(snapshot.docs.map((doc) => ({
+      const ordersRef = collection(db, "user", user.uid, "orders");
+      const ordersQuery = query(ordersRef, orderBy("created", "desc"));
+      const unsubscribe = onSnapshot(ordersQuery, (snapshot) => {
+        // console.log(snapshot);
+        setOrders(
+          snapshot.docs.map((doc) => ({
             id: doc.id,
             data: doc.data(),
           }))
         );
-        });
+      });
     } else {
       setOrders([]);
     }
@@ -31,7 +30,9 @@ function Orders() {
       <section className={classes.container}>
         <div className={classes.orders__container}>
           <h2>Your Orders</h2>
-          {orders?.length==0&&<div style={{padding:"20px"}}>you don't have orders yet.</div>}
+          {orders?.length == 0 && (
+            <div style={{ padding: "20px" }}>you don't have orders yet.</div>
+          )}
           <div>
             {orders?.map((eachOrder, i) => {
               return (
@@ -54,7 +55,7 @@ function Orders() {
         </div>
       </section>
     </LayOut>
-          )};
-
+  );
+}
 
 export default Orders;

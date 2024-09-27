@@ -28,59 +28,58 @@ function Cart() {
     <LayOut>
       <section className={classes.container}>
         <div className={classes.Cart__container}>
-            <h2>Hello</h2>
-            <h3>Your shopping basket</h3>
-            <br />
-            
-            {
-              
-                  basket?.length==0?(<p>Opps ! No item in your cart</p>):(
-                  basket?.map((item,i)=>{
-                        return (
-                          <section className={classes.cart__product}>
-                            <ProductCard
-                              key={i}
-                              product={item}
-                              renderDesc={true}
-                              renderAdd={false}
-                              flex={true}
-                            />
-                            <div className={classes.button_container}>
-                              <button
-                                className={classes.btn}
-                                onClick={() => increment(item)}
-                              >
-                                <IoIosArrowUp 
-                                size={22}/>
-                              </button>
-                              <span>{item.amount}</span>
-                              <button
-                                className={classes.btn}
-                                onClick={() => decrement(item.id)}
-                              >
-                                <IoIosArrowDown size={22} />
-                              </button>
-                            </div>
-                          </section>
-                        ); 
-                  })
-            )
-            }
+          <h2>Hello</h2>
+          <h3>Your shopping basket</h3>
+          <br />
+
+          {basket?.length == 0 ? (
+            <p>Opps ! No item in your cart</p>
+          ) : (
+            basket?.map((item, i) => {
+              return (
+                <section className={classes.cart__product}>
+                  <ProductCard
+                    key={i}
+                    product={item}
+                    renderDesc={true}
+                    renderAdd={false}
+                    flex={true}
+                  />
+                  <div className={classes.button_container}>
+                    <button
+                      className={classes.btn}
+                      onClick={() => increment(item)}
+                    >
+                      <IoIosArrowUp size={22} />
+                    </button>
+                    <span>{item.amount}</span>
+                    <button
+                      className={classes.btn}
+                      onClick={() => decrement(item.id)}
+                    >
+                      <IoIosArrowDown size={22} />
+                    </button>
+                  </div>
+                </section>
+              );
+            })
+          )}
         </div>
-        
-       {basket?.length !==0&&(
-<div>
-<div className={classes.subtotal}>
-      <p>subtotal({basket?.length}items)</p>
-      <CurrencyFormat amount={total}/>
-</div>
-<span>
-      <input type='checkbox'/>
-      <small>This order contains a gift</small>
-</span>
-<Link to="/payments">continue to checkout</Link>
-</div>
-       )}
+
+        {basket?.length !== 0 && (
+          <div>
+            <div className={classes.subtotal}>
+              <p>subtotal({basket?.length}items)</p>
+              <CurrencyFormat amount={total} />
+
+              <span>
+                <input type="checkbox" />
+                <small>This order contains a gift</small>
+              </span>
+              <Link to="/payments">continue to checkout</Link>
+            </div>
+          </div>
+        )}
       </section>
     </LayOut>
   );

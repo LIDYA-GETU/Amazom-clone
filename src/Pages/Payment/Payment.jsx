@@ -11,6 +11,7 @@ import { db } from "../../Utility/Firebase";
 import { setDoc, collection, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import ProtectedRoute from "../../Components/ProtectedRoute/ProtectedRoute";
+import { Type } from "../../Utility/action.type";
 function Payment() {
   const [{ user, basket }, dispatch] = useContext(DataContext);
   const totalItem = basket?.reduce((amount, item) => {
@@ -60,7 +61,7 @@ function Payment() {
         }
       );
       // empty basket
-      dispatch({ type: Type.EMPTY_BASKET });
+      dispatch({ type: Type.EMPTY_BASKET});
       setProcessing(false);
       navigate("/orders", { state: { msg: "you have placed new order " } });
     } catch (error) {
