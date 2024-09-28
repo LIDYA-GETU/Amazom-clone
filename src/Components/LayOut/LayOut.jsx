@@ -1,7 +1,7 @@
-import React from 'react'
-import Header from '../Header/header'
+import React from "react";
+import Header from "../Header/Header";
 
-function LayOut({children}) {
+function LayOut({ children }) {
   return (
     <div>
       <Header />
@@ -10,4 +10,4 @@ function LayOut({children}) {
   );
 }
 
-export default LayOut
+export default LayOut;
